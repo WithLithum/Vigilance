@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Rage;
 
-namespace LandtoryV.Engine.Entities
+namespace Vigilance.Engine.Entities
 {
     internal class PedInfo
     {

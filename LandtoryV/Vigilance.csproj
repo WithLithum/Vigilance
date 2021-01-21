@@ -7,8 +7,8 @@
     <ProjectGuid>{BF52F949-6469-4A09-8882-430F7E75CDA0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LandtoryV</RootNamespace>
-    <AssemblyName>LandtoryV</AssemblyName>
+    <RootNamespace>Vigilance</RootNamespace>
+    <AssemblyName>Vigilance</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,6 +56,7 @@
     <Compile Include="Engine\Entities\PedInfo.cs" />
     <Compile Include="Engine\Functions.cs" />
     <Compile Include="Engine\Log.cs" />
+    <Compile Include="Engine\Scripting\ProcessFiber.cs" />
     <Compile Include="Entities\BackupType.cs" />
     <Compile Include="Entities\Backup\BackupUnit.cs" />
     <Compile Include="Entities\Backup\PoliceBackup.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="User\UI\MenuShared.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Engine\Scripting\Service\" />
     <Folder Include="User\Controls\" />
   </ItemGroup>
   <ItemGroup>

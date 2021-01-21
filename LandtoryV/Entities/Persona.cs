@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Rage;
 using RandomNameGeneratorLibrary;
 
-namespace LandtoryV.Entities
+namespace Vigilance.Entities
 {
     public class Persona
     {

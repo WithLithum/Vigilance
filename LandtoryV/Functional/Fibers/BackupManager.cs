@@ -1,5 +1,5 @@
-﻿using LandtoryV.Entities;
-using LandtoryV.User.UI;
+﻿using Vigilance.Entities;
+using Vigilance.User.UI;
 using Rage;
 using Rage.Native;
 using RAGENativeUI;
@@ -7,7 +7,7 @@ using RAGENativeUI.Elements;
 using System;
 using System.Windows.Forms;
 
-namespace LandtoryV.Functional.Fibers
+namespace Vigilance.Functional.Fibers
 {
     public static class BackupManager
     {

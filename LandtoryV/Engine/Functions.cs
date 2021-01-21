@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using LandtoryV.Engine.Entities;
+using Vigilance.Engine.Entities;
 using Rage;
 
-namespace LandtoryV.Engine
+namespace Vigilance.Engine
 {
     public static class Functions
     {

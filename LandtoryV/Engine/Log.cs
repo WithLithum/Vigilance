@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LandtoryV.Engine
+namespace Vigilance.Engine
 {
     internal static class Log
     {

@@ -1,6 +1,6 @@
 ﻿using Rage.Native;
 
-namespace LandtoryV.User.UI
+namespace Vigilance.User.UI
 {
     public static class Interface
     {

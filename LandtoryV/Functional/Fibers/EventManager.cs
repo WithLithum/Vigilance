@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Rage;
 
-namespace LandtoryV.Functional.Fibers
+namespace Vigilance.Functional.Fibers
 {
     internal static class EventManager
     {

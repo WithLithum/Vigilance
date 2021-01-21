@@ -1,9 +1,9 @@
-﻿using LandtoryV.Functional.Fibers;
+﻿using Vigilance.Functional.Fibers;
 using Rage;
 
 [assembly: Rage.Attributes.Plugin("LandtoryV", Author = "RelaperCrystal", Description = "Yet another cop mod")]
 
-namespace LandtoryV
+namespace Vigilance
 {
     static class EntryPoint
     {
@@ -15,11 +15,9 @@ namespace LandtoryV
 
         public static bool Shutdown { get; private set; }
 
-        // ReSharper disable once UnusedMember.Local
-        // ReSharper disable once ArrangeTypeMemberModifiers
         static void Main()
         {
-            Game.LogTrivial("Initializing Landtory");
+            Game.LogTrivial("Initializing Vigilance");
             Game.LogTrivial("Thread Started > Main Manager");
             main = GameFiber.StartNew(MainManager.Loop);
             

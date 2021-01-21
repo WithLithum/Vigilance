@@ -8,10 +8,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using LandtoryV.User.UI;
+using Vigilance.User.UI;
 using Rage.Native;
 
-namespace LandtoryV.Functional.Fibers
+namespace Vigilance.Functional.Fibers
 {
     public static class MainMenu
     {
@@ -25,8 +25,8 @@ namespace LandtoryV.Functional.Fibers
         {
             Game.LogTrivial("Thread Loop > Main Menu");
             pool = new MenuPool();
-            main = new UIMenu("Landtory", "Control Menu");
-            version = new UIMenuItem("Version", "Current version of Landtory.");
+            main = new UIMenu("Vigilance", "Control Menu");
+            version = new UIMenuItem("Version", "Current version of Vigilance.");
             version.RightLabel = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             version.BackColor = Color.BlueViolet;
             main.AddItem(version);

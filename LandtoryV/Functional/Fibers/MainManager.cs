@@ -1,5 +1,5 @@
-﻿using LandtoryV.Entities;
-using LandtoryV.Proceed;
+﻿using Vigilance.Entities;
+using Vigilance.Proceed;
 using Rage;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LandtoryV.Functional.Fibers
+namespace Vigilance.Functional.Fibers
 {
     public static class MainManager
     {

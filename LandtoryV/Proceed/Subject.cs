@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LandtoryV.Proceed
+namespace Vigilance.Proceed
 {
     public class Subject
     {

@@ -1,6 +1,6 @@
-﻿using LandtoryV.Engine;
-using LandtoryV.Engine.API;
-using LandtoryV.Proceed;
+﻿using Vigilance.Engine;
+using Vigilance.Engine.API;
+using Vigilance.Proceed;
 using Rage;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LandtoryV.Functional.Fibers
+namespace Vigilance.Functional.Fibers
 {
     internal static class ArrestManager
     {

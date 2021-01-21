@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LandtoryV.Entities
+namespace Vigilance.Entities
 {
     public enum BackupType
     {

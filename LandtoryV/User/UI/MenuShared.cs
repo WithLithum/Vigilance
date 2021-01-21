@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LandtoryV.User.UI
+namespace Vigilance.User.UI
 {
     internal static class MenuShared
     {
