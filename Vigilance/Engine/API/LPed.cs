@@ -1,17 +1,13 @@
 ﻿using Vigilance.Entities;
 using Rage;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vigilance.Engine.API
 {
     /// <summary>
     /// Extensions to Ped.
     /// </summary>
-    [Obsolete]
+    [Obsolete("See Functions")]
     public class LPed : Ped
     {
         public bool IsArrested { get; private set; }
@@ -62,7 +58,7 @@ namespace Vigilance.Engine.API
             Tasks.PlayAnimation(new AnimationDictionary("mp_arresting"), "idle", 9.0f, AnimationFlags.UpperBodyOnly | AnimationFlags.SecondaryTask | AnimationFlags.StayInEndFrame);
             Heading = Game.LocalPlayer.Character.Heading;
             Tasks.StandStill(3500);
-            Rage.Task t = Game.LocalPlayer.Character.Tasks.PlayAnimation(new AnimationDictionary("mp_uncuff_paired"), "crook_01_p2_fwd", 1f, AnimationFlags.None);
+            Task t = Game.LocalPlayer.Character.Tasks.PlayAnimation(new AnimationDictionary("mp_uncuff_paired"), "crook_01_p2_fwd", 1f, AnimationFlags.None);
             t.WaitForCompletion();
 
             Group player = Game.LocalPlayer.Group;

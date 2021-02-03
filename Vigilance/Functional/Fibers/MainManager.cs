@@ -1,13 +1,10 @@
 ﻿using Vigilance.Entities;
-using Vigilance.Proceed;
 using Rage;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Vigilance.Engine;
 
 namespace Vigilance.Functional.Fibers
 {
@@ -23,7 +20,7 @@ namespace Vigilance.Functional.Fibers
 #endif
             Game.FrameRender += Game_FrameRender;
             Game.RawFrameRender += Game_RawFrameRender;
-            while (true)
+            while (Common.IsRunning)
             {
                 GameFiber.Yield();
 
@@ -60,6 +57,7 @@ namespace Vigilance.Functional.Fibers
 #endif
         }
 
-        public static bool IsCopModel(Subject s) => s.RagePed.Model.Name == "s_m_y_cop_01" || s.RagePed.Model.Name == "s_f_y_cop_01" || s.RagePed.Model.Name == "s_f_y_sheriff_01" || s.RagePed.Model.Name == "s_m_y_sheriff_01" || s.RagePed.Model.Name == "s_m_y_swat_01";
+        [Obsolete("Use Functions.IsPedACop instead.")]
+        public static bool IsCopModel(Ped ped) => ped.Model.Name == "s_m_y_cop_01" || ped.Model.Name == "s_f_y_cop_01" || ped.Model.Name == "s_f_y_sheriff_01" || ped.Model.Name == "s_m_y_sheriff_01" || ped.Model.Name == "s_m_y_swat_01";
     }
 }

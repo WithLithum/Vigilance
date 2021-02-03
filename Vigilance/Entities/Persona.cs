@@ -1,56 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Rage;
 using RandomNameGeneratorLibrary;
 
 namespace Vigilance.Entities
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class Persona
     {
-        internal static Dictionary<Ped, Persona> Personas = new Dictionary<Ped, Persona>();
+        internal static readonly Dictionary<Ped, Persona> Personas = new Dictionary<Ped, Persona>();
 
         public Persona(Ped ped)
         {
-            PersonNameGenerator generator = new PersonNameGenerator();
+            var generator = new PersonNameGenerator();
 
-            if (ped.IsMale)
-            {
-                theName = generator.GenerateRandomMaleFirstAndLastName();
-            }
-            else
-            {
-                theName = generator.GenerateRandomFemaleFirstAndLastName();
-            }
+            _theName = ped.IsMale ? generator.GenerateRandomMaleFirstAndLastName() : generator.GenerateRandomFemaleFirstAndLastName();
         }
 
-        string theName;
+        private string _theName;
 
         public string FirstName
         {
-            get => theName.Split(' ')[0];
+            get => _theName.Split(' ')[0];
             set
             {
-                string[] names = theName.Split(' ');
+                string[] names = _theName.Split(' ');
                 names[0] = value;
-                theName = names[0] + " " + names[1];
+                _theName = names[0] + " " + names[1];
             }
         }
         public string LastName
         {
-            get => theName.Split(' ')[1];
+            get => _theName.Split(' ')[1];
             set
             {
-                string[] names = theName.Split(' ');
+                string[] names = _theName.Split(' ');
                 names[1] = value;
-                theName = names[0] + " " + names[1];
+                _theName = names[0] + " " + names[1];
             }
         }
         public string FullName
         {
-            get => theName;
+            get => _theName;
             set
             {
                 string[] exceptedName = value.Split(' ');

@@ -1,15 +1,10 @@
 ﻿using Rage;
 using RAGENativeUI;
 using RAGENativeUI.Elements;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Vigilance.User.UI;
-using Rage.Native;
+using Common = Vigilance.Engine.Common;
 
 namespace Vigilance.Functional.Fibers
 {
@@ -45,7 +40,7 @@ namespace Vigilance.Functional.Fibers
             main.RefreshIndex();
             pool.Add(main);
 
-            while(true)
+            while (Common.IsRunning)
             {
                 GameFiber.Yield();
                 pool.ProcessMenus();

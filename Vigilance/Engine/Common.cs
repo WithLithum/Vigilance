@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-namespace Vigilance.Engine
+﻿namespace Vigilance.Engine
 {
     internal static class Common
     {
-        
+        internal static bool IsRunning { get; set; } = true;
     }
 }

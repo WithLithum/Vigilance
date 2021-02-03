@@ -1,16 +1,64 @@
 ﻿using System.Collections.Generic;
 using Vigilance.Engine.Entities;
 using Rage;
+using Rage.Native;
 
 namespace Vigilance.Engine
 {
     public static class Functions
     {
+        private static string[] cityZones =
+        {
+            "RICHM",
+            "golf",
+            "SanAnd",
+            "ROCKF",
+            "WVINE",
+            "AIRP",
+            "VINE",
+            "ALTA",
+            "BURTON",
+            "HAWICK",
+            "DOWNT",
+            "DTWINE",
+            "EAST_V",
+            "LEGSQU",
+            "DAVIS",
+            "ZQ_UAR",
+            "STRAW",
+            "NOOSE",
+            "MURRI",
+            "MESA",
+            "PBOX",
+            "TERMINA",
+            "LOSPUER",
+            "STAD",
+            "BANNING",
+            "CHAMH",
+            "ELYSIAN",
+            "RANCHO",
+            "VESP",
+            "VBEACH",
+            "VCANA",
+            "MORN",
+            "RICHM",
+            "DELPE",
+            "DELBE",
+            "MOVIE",
+            "KOREAT"
+        };
+        
         internal static List<PedInfo> PedInfos = new List<PedInfo>();
 
-        public static void IsPlayerInCountryside()
-        { 
-            
+        public static bool IsPlayerInCountryside()
+        {
+            var playerZone = GetZoneName(Game.LocalPlayer.Character.Position);
+            foreach (var zone in cityZones)
+            {
+                if (zone == playerZone) return false;
+            }
+
+            return true;
         }
 
         public static void MakePedSurrender(Ped ped)
@@ -115,6 +163,21 @@ namespace Vigilance.Engine
             PedInfos.Add(newInfo);
             index = PedInfos.IndexOf(newInfo);
             return newInfo;
+        }
+
+        public static string GetZoneName(Vector3 location)
+        {
+            return NativeFunction.Natives.GET_NAME_OF_ZONE<string>(location.X, location.Y, location.Z);
+        }
+
+        /// <summary>
+        /// Determines whether the specified ped is a peacekeeper.
+        /// </summary>
+        /// <param name="ped">The ped.</param>
+        /// <returns><c>true</c> if the ped is a LEO staff; otherwise, <c>false</c>.</returns>
+        public static bool IsPedACop(Ped ped)
+        {
+            return ped.RelationshipGroup == RelationshipGroup.Cop || ped.Model.Name == "s_m_y_cop_01" || ped.Model.Name == "s_f_y_cop_01" || ped.Model.Name == "s_f_y_sheriff_01" || ped.Model.Name == "s_m_y_sheriff_01" || ped.Model.Name == "s_m_y_swat_01";
         }
     }
 }

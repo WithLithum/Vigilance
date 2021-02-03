@@ -5,7 +5,11 @@ using Rage.Native;
 using RAGENativeUI;
 using RAGENativeUI.Elements;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using Vigilance.Engine;
+using Vigilance.Entities.Backup;
+using Common = Vigilance.Engine.Common;
 
 namespace Vigilance.Functional.Fibers
 {
@@ -13,11 +17,13 @@ namespace Vigilance.Functional.Fibers
     {
         // static bool isMenuProcessing = false;
         // static bool isBackupRunning = false;
-        static readonly MenuPool Pool = MenuShared.publicPool;
+        static readonly MenuPool Pool = MenuShared.PublicPool;
         static UIMenu mainMenu;
         static UIMenuItem itemPolice;
         static UIMenuItem itemFiretruck;
         static UIMenuItem itemParamedic;
+
+        private static List<BackupUnit> runningBackups = new List<BackupUnit>();
 
         internal static void Loop()
         {
@@ -47,7 +53,7 @@ namespace Vigilance.Functional.Fibers
                 Game.LogTrivial(ex.GetType().Name);
                 Game.LogTrivial(ex.StackTrace);
             }
-            while(!EntryPoint.Shutdown)
+            while (Common.IsRunning)
             {
                 if(Game.IsKeyDown(Keys.B) && !Pool.IsAnyMenuOpen())
                 {
@@ -58,6 +64,24 @@ namespace Vigilance.Functional.Fibers
             }
         }
 
+        internal static void BackupTicker()
+        {
+            while (Common.IsRunning)
+            {
+                for (var i = 0; i < runningBackups.Count; i++)
+                {
+                    if (runningBackups[i].IsRunning)
+                    {
+                        runningBackups[i].Process();
+                    }
+                    else
+                    {
+                        runningBackups.RemoveAt(i);
+                    }
+                }
+            }
+        }
+        
         private static void ItemParamedic_Activated(UIMenu sender, UIMenuItem selectedItem)
         {
             Game.DisplayNotification("Requesting <b>ambulance</b> from Dispatch");
@@ -81,13 +105,37 @@ namespace Vigilance.Functional.Fibers
 
         static void CallBackup(BackupType type, Vector3 position)
         {
-            NativeFunction.Natives.CREATE_INCIDENT<bool>((int)type, position.X, position.Y, position.Z, 2, 3.0f, new NativePointer());
+            if (type == BackupType.Police)
+            {
+                if (Functions.IsPlayerInCountryside())
+                {
+                    var sheriff = new SheriffBackup();
+                    sheriff.Start(World.GetNextPositionOnStreet(Game.LocalPlayer.Character.Position.Around(350f)), ResponseType.Emergency);
+                    runningBackups.Add(sheriff);
+                    
+                }
+                else
+                {
+                    var police = new PoliceBackup();
+                    police.Start(World.GetNextPositionOnStreet(Game.LocalPlayer.Character.Position.Around(350f)),
+                        ResponseType.Emergency);
+                    runningBackups.Add(police);
+
+                }
+            }
+            else
+            {
+                var _ = 0;
+                NativeFunction.Natives.CREATE_INCIDENT<bool>((int)type, position.X, position.Y, position.Z, 2, 3.0f, ref _);
+            }
+            
            
         }
 
         static void ReportCrime(int id)
         {
-            NativeFunction.Natives.REPORT_CRIME(Game.LocalPlayer, id, 2);
+            // use hash to hope triggers the audio
+            NativeFunction.Natives.xE9B09589827545E7(Game.LocalPlayer, id, 2);
         }
     }
 }

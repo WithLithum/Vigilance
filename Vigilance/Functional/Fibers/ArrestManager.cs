@@ -1,20 +1,12 @@
 ﻿using Vigilance.Engine;
-using Vigilance.Engine.API;
-using Vigilance.Proceed;
 using Rage;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Vigilance.Functional.Fibers
 {
     internal static class ArrestManager
     {
         private static readonly List<Ped> ArrestedSubjects = new List<Ped>();
-        private static readonly Dictionary<uint, Ped> SubjectDictionary = new Dictionary<uint, Ped>();
 
         private static void Fiber()
         {
@@ -23,10 +15,10 @@ namespace Vigilance.Functional.Fibers
 
             var station = new Vector3(463f, -990f, 24f);
 
-            while (true)
+            while (Common.IsRunning)
             {
                 GameFiber.Yield();
-                foreach(var member in Game.LocalPlayer.Group.Members)
+                foreach (var member in Game.LocalPlayer.Group.Members)
                 {
                     if (member.IsDead) Game.LocalPlayer.Group.RemoveMember(member);
                 }
@@ -50,9 +42,9 @@ namespace Vigilance.Functional.Fibers
                     }
                 }
 
-                for (int i = 0; i < ArrestedSubjects.Count; i++)
+                for (var i = 0; i < ArrestedSubjects.Count; i++)
                 {
-                    if(ArrestedSubjects.Count >= i)
+                    if (ArrestedSubjects.Count >= i)
                     {
                         if(!Functions.IsPedArrested(ArrestedSubjects[i]))
                         {
@@ -64,7 +56,7 @@ namespace Vigilance.Functional.Fibers
                 if (player.Character.DistanceTo(station) < 5.0f)
                 {
                     Game.DisplayHelp("Press ~INPUT_CONTEXT~ to drop off suspects.");
-                    if(Game.IsControlPressed(0, GameControl.Context) && ArrestedSubjects.Count != 0)
+                    if (Game.IsControlPressed(0, GameControl.Context) && ArrestedSubjects.Count != 0)
                     {
                         foreach(var detainee in ArrestedSubjects)
                         {
@@ -89,7 +81,7 @@ namespace Vigilance.Functional.Fibers
                 if (!p.Exists()) continue;
                 Log.Trace("ArrestManager", "Found entity.");
 
-                if(!Functions.IsPedSurrendered(p))
+                if (!Functions.IsPedSurrendered(p))
                 {
                     Log.Trace("Ped is not surrendered.", "ArrestManager");
                     Functions.MakePedSurrender(p);
@@ -106,7 +98,7 @@ namespace Vigilance.Functional.Fibers
 
         internal static GameFiber StartFiber()
         {
-            GameFiber result = new GameFiber(Fiber);
+            var result = new GameFiber(Fiber);
             result.Start();
             return result;
         }

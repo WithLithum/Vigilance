@@ -1,11 +1,14 @@
-﻿using Vigilance.Functional.Fibers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Vigilance.Functional.Fibers;
 using Rage;
+using Vigilance.Engine;
 
-[assembly: Rage.Attributes.Plugin("LandtoryV", Author = "RelaperCrystal", Description = "Yet another cop mod")]
+[assembly: Rage.Attributes.Plugin("Vigilance", Author = "RelaperCrystal", Description = "Yet another cop mod")]
 
 namespace Vigilance
 {
-    static class EntryPoint
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
+    internal static class EntryPoint
     {
         private static GameFiber backup;
         private static GameFiber main;
@@ -13,9 +16,8 @@ namespace Vigilance
         private static GameFiber arrest;
         private static GameFiber eventFiber;
 
-        public static bool Shutdown { get; private set; }
-
-        static void Main()
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        private static void Main()
         {
             Game.LogTrivial("Initializing Vigilance");
             Game.LogTrivial("Thread Started > Main Manager");
@@ -34,12 +36,19 @@ namespace Vigilance
             eventFiber = GameFiber.StartNew(EventManager.Loop);
 
             Game.LogTrivial("Initialization > Complete");
-            GameFiber.Sleep(-1);
+            GameFiber.Hibernate();
         }
 
-        static void ShutdownMod()
+        [SuppressMessage("ReSharper", "UnusedMember.Local")]
+        [SuppressMessage("ReSharper", "UnusedParameter.Local")]
+        private static void OnUnload(bool fail)
         {
-            Shutdown = true;
+            backup.Abort();
+            main.Abort();
+            menu.Abort();
+            arrest.Abort();
+            eventFiber.Abort();
+            Common.IsRunning = false;
         }
     }
 }

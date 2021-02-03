@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rage;
+﻿using Rage;
+using Vigilance.Engine;
 
 namespace Vigilance.Functional.Fibers
 {
@@ -11,8 +7,11 @@ namespace Vigilance.Functional.Fibers
     {
         internal static void Loop()
         {
-            while (true)
+            while (Common.IsRunning)
             {
+                // not implemented
+                // TODO implement
+
                 GameFiber.Sleep(1000);
             }
         }
