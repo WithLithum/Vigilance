@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Engine\API\LPed.cs" />
     <Compile Include="Engine\Common.cs" />
     <Compile Include="Engine\Entities\PedInfo.cs" />
     <Compile Include="Engine\Functions.cs" />
@@ -76,6 +75,7 @@
     <Compile Include="User\UI\MenuShared.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Engine\API\" />
     <Folder Include="Engine\Scripting\Service\" />
     <Folder Include="User\Controls\" />
   </ItemGroup>

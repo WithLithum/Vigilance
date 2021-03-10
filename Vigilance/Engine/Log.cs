@@ -9,9 +9,19 @@ namespace Vigilance.Engine
             Game.LogTrivial($"[{sender}/{lvl}] {message}");
         }
 
+        private static void LogVerbose(string sender, string lvl, string message)
+        {
+            Game.LogVerbose($"[{sender}/{lvl}] {message}");
+        }
+
         internal static void Trace(string sender, string message)
         {
             LogOutput(sender, "TRACE", message);
+        }
+
+        internal static void TraceVerbose(string sender, string message)
+        {
+            LogVerbose(sender, "TRACE", message);
         }
 
         internal static void Info(string sender, string message)

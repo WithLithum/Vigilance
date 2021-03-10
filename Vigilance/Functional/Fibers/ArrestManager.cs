@@ -44,12 +44,9 @@ namespace Vigilance.Functional.Fibers
 
                 for (var i = 0; i < ArrestedSubjects.Count; i++)
                 {
-                    if (ArrestedSubjects.Count >= i)
+                    if (ArrestedSubjects.Count >= i && !Functions.IsPedArrested(ArrestedSubjects[i]))
                     {
-                        if(!Functions.IsPedArrested(ArrestedSubjects[i]))
-                        {
-                            ArrestedSubjects.RemoveAt(i);
-                        }
+                        ArrestedSubjects.RemoveAt(i);
                     }
                 }
 
@@ -72,23 +69,23 @@ namespace Vigilance.Functional.Fibers
                 {
                     continue;
                 }
-                Log.Trace("ArrestManager", "Found key down.");
+                Log.TraceVerbose("ArrestManager", "Found key down.");
                 var entity = player.GetFreeAimingTarget();
-                Log.Trace("ArrestManager", "Player is really aiming at something");
+                Log.TraceVerbose("ArrestManager", "Player is really aiming at something");
                 if (!entity.Exists() || !entity.Model.IsPed) continue;
                 var p = (Ped)entity;
-                Log.Trace("ArrestManager", "Casting it to ped");
+                Log.TraceVerbose("ArrestManager", "Casting it to ped");
                 if (!p.Exists()) continue;
-                Log.Trace("ArrestManager", "Found entity.");
+                Log.TraceVerbose("ArrestManager", "Found entity.");
 
                 if (!Functions.IsPedSurrendered(p))
                 {
-                    Log.Trace("Ped is not surrendered.", "ArrestManager");
+                    Log.TraceVerbose("Ped is not surrendered.", "ArrestManager");
                     Functions.MakePedSurrender(p);
                 }
                 else
                 {
-                    Log.Trace("Arresting the ped.", "ArrestManager");
+                    Log.TraceVerbose("Arresting the ped.", "ArrestManager");
                     Functions.ArrestPedByPlayer(p);
                     ArrestedSubjects.Add(p);
                 }

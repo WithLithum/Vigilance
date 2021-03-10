@@ -10,12 +10,14 @@ namespace Vigilance.Functional.Fibers
 {
     public static class MainMenu
     {
+#pragma warning disable S1450
         private static MenuPool pool;
         private static UIMenu main;
         private static UIMenuItem version;
         private static UIMenuItem debugCuff;
         private static UIMenuItem debugPursuit;
-    
+#pragma warning restore S1450
+
         internal static void Loop()
         {
             Game.LogTrivial("Thread Loop > Main Menu");

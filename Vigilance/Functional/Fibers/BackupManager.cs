@@ -15,15 +15,15 @@ namespace Vigilance.Functional.Fibers
 {
     public static class BackupManager
     {
-        // static bool isMenuProcessing = false;
-        // static bool isBackupRunning = false;
-        static readonly MenuPool Pool = MenuShared.PublicPool;
-        static UIMenu mainMenu;
-        static UIMenuItem itemPolice;
-        static UIMenuItem itemFiretruck;
-        static UIMenuItem itemParamedic;
+        private static readonly MenuPool Pool = MenuShared.PublicPool;
+        private static UIMenu mainMenu;
+#pragma warning disable S1450 // Private fields only used as local variables in methods should become local variables
+        private static UIMenuItem itemPolice;
+        private static UIMenuItem itemFiretruck;
+        private static UIMenuItem itemParamedic;
+#pragma warning restore S1450 // Private fields only used as local variables in methods should become local variables
 
-        private static List<BackupUnit> runningBackups = new List<BackupUnit>();
+        private static readonly List<BackupUnit> runningBackups = new List<BackupUnit>();
 
         internal static void Loop()
         {

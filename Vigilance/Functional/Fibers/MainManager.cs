@@ -1,6 +1,5 @@
 ﻿using Vigilance.Entities;
 using Rage;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace Vigilance.Functional.Fibers
         internal static void Loop()
         {
             Game.LogTrivial("Thread Loop > Main Manager");
-#if !DEBUG // prevent model changes quickly
+#if !DEBUG // prevent models being changed quickly
             Game.LocalPlayer.Model = "s_m_y_cop_01";
 #endif
             Game.FrameRender += Game_FrameRender;
@@ -24,23 +23,19 @@ namespace Vigilance.Functional.Fibers
             {
                 GameFiber.Yield();
 
-                rectangleY = Game.Resolution.Height - 25;
+                rectangleY = 10;
 
-                int length = Persona.Personas.Count;
-                if (length > 0)
+                var length = Persona.Personas.Count;
+                if (length <= 0) continue;
+                var keys = Persona.Personas.Keys.ToList();
+
+                for (var i = 0; i < length; i++)
                 {
-                    List<Ped> keys = Persona.Personas.Keys.ToList();
-
-                    for (int i = 0; i < length; i++)
-                    {
-                        if (!keys[i])
-                        {
-                            Persona.Personas.Remove(keys[i]);
-                            length--;
-                        }
-                    }
+                    if (keys[i]) continue;
+                    Persona.Personas.Remove(keys[i]);
+                    length--;
                 }
-                
+
             }
         }
 
@@ -53,11 +48,8 @@ namespace Vigilance.Functional.Fibers
         {
 #if DEBUG
             e.Graphics.DrawRectangle(new RectangleF(10, rectangleY, 350, 15), Color.Black);
-            e.Graphics.DrawText("LANDTORY MANUALLY BULIT VERSION", "Arial", 12f, new PointF(12, 12), Color.White);
+            e.Graphics.DrawText("LANDTORY MANUALLY BUILT VERSION", "Arial", 12f, new PointF(12, 12), Color.White);
 #endif
         }
-
-        [Obsolete("Use Functions.IsPedACop instead.")]
-        public static bool IsCopModel(Ped ped) => ped.Model.Name == "s_m_y_cop_01" || ped.Model.Name == "s_f_y_cop_01" || ped.Model.Name == "s_f_y_sheriff_01" || ped.Model.Name == "s_m_y_sheriff_01" || ped.Model.Name == "s_m_y_swat_01";
     }
 }
